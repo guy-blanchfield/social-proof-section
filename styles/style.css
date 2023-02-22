@@ -1,0 +1,355 @@
+:root {
+    /* colours */
+
+    /* try it this way (i.e. without the hsl() just the numbers 
+    so we can do alphas in the declarations) */
+    /* remember that at declaration you need the hsl()
+    as well as the var()! */
+    --primary-verydarkmagenta: 300, 43%, 22%;
+    --primary-softpink: 333, 80%, 67%;
+
+    --neutral-darkgrayishmagenta: 303, 10%, 53%;
+    --neutral-lightgrayishmagenta: 300, 24%, 96%;
+    --neutral-white: 0, 0%, 100%;
+
+
+    /* applied colours */
+    --text: hsl(var(--primary-verydarkmagenta));
+    --muted: hsl(var(--neutral-darkgrayishmagenta));
+    --light: hsl(var(--neutral-lightgrayishmagenta));
+    --accent: hsl(var(--primary-softpink));
+
+
+    /* fonts */
+    /* from https://css-tricks.com/accessible-font-sizing-explained/ */
+
+    /* Avoid setting a base font-size
+    
+    My recommendation is to avoid setting 
+    font-size on the :root, <html> or <body> elements 
+    in favor of letting the browser’s default size serve
+    as a baseline from where we can cascade our own styles. 
+    Since this default is accessible, the content will 
+    also be accessible. */
+
+    /* Do not set a font-size on a :root, body nor html level */
+    /* Let your main text size be decided by the browser or the user settings */ 
+
+    /* all major browsers have default of 16px */
+
+    /* The 62.5% rule */
+
+    /* In order to seamlessly convert pixels to rem, 
+    we can set the root sizing to 62.5%. 
+    That means 1rem equals 10px: */
+
+    font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+    --font-size--small: 1.4rem; /* 14px */
+    --font-size--default: 1.6rem; /* 16px */
+    --font-size--large: 2.4rem; /* 24px */
+    --font-size--xlarge: 3.6rem; /* 36px */
+    --font-size--xxlarge: 4.8rem; /* 36px */
+
+    /* then you could create utility classes for these custom properties */
+    /* see below */
+    /* or just use them as and when */
+
+    font-family: 'League Spartan', sans-serif;
+    /* set body font-size here 
+    (specifically for this social-proof-section project)
+    so we can leave the examples above for future reference */
+    --font-size--body: 1.5rem; /* 15px */
+    --font-size--intro: 1.7rem; /* 17px */
+}
+
+/* utility classes for font-sizes */
+/*
+
+.font-size--small {
+    font-size: var(--font-size--small);
+}
+  
+.font-size--default {
+font-size: var(--font-size--default);
+}
+
+.font-size--large {
+font-size: var(--font-size--large);
+}
+
+*/
+
+body {
+    min-height: 100%;
+}
+
+/* try the background image on the body to start with */
+/* nope, container it is then */
+
+.container {
+
+    display: flex;
+    flex-direction: column;
+    /* place-content: center; */
+    min-height: 100%;
+
+    /* border: 1px solid #00f; */
+
+}
+
+/* challenge-container is everything except the header and footer */
+/* which are the frontend mentor title and attribution */
+/* i.e. all the challenge content is in challenge-container */
+.challenge-container {
+    display: grid;
+    place-content: center;
+    /* border: 1px solid coral; */
+
+    flex: 1 1 auto;
+    /* shorthand for:
+    flex-grow: 1,
+    flex-shrink: 1,
+    flex-basis: auto
+    - should make it fill the available space
+    */
+
+    background-image: url("../images/bg-pattern-top-mobile.svg"),
+                    url("../images/bg-pattern-bottom-mobile.svg");
+    background-position: top left, bottom right;
+    background-repeat: no-repeat, no-repeat;
+    background-color: hsl(var(--neutral-white));
+    background-attachment: scroll, scroll;
+}
+
+@media (min-width: 850px) {
+    .challenge-container {
+        background-image: url("../images/bg-pattern-top-desktop.svg"),
+        url("../images/bg-pattern-bottom-desktop.svg");
+    }
+}
+
+
+.main {
+    display: grid;
+    row-gap: 4rem;
+    column-gap: 0;
+    padding: 3rem;
+    /* margin-bottom: 4rem; */
+
+    /* border: 1px solid #ff0; */
+}
+
+@media (min-width: 850px) {
+    .main {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1130px;
+    }
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    gap: 2rem;
+}
+
+@media (min-width: 850px) {
+    .intro {
+        grid-column: 1 / 2;
+        align-items: revert;
+        margin-top: 0;
+    }
+}
+
+.intro h2 {
+    color: hsl(var(--primary-verydarkmagenta));
+    color: var(--text);
+    font-size: var(--font-size--xlarge);
+    font-weight: 700;
+    line-height: 87.5%;
+    max-width: 15ch;
+    text-align: center;
+    /* border: 1px solid #0f0; */
+}
+
+.intro p {
+    color: hsl(var(--neutral-darkgrayishmagenta));
+    font-size: var(--font-size--intro);
+    font-weight: 500; 
+    text-align: center;
+    /* padding: 1rem; */
+    /* border: 1px solid #f00;  */
+}
+
+@media (min-width: 850px) {
+    .intro h2 {
+        text-align: revert;
+        font-size: var(--font-size--xxlarge);
+        /* line-height: 3.6rem; */
+    }
+
+    .intro p {
+        text-align: revert; 
+        max-width: 42ch;
+        /* bit of bottom margin in desktop
+        just to force the parent to get a bit deeper */
+        margin-bottom: 2rem;
+    }
+}
+
+@media (min-width: 850px) {
+    .ratings {
+        grid-column: 2 / 3;
+        align-self: center;
+        /* bit of padding to push it across a bit */
+        padding-left: 2rem;
+    }
+}
+
+
+.ratings ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+
+    /* border: 1px solid #f0f;  */
+}
+
+@media (min-width: 850px) {
+    .ratings ul {
+        align-items: flex-start;
+    }
+}
+
+.ratings li {
+    /* flex container behaviour */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: hsl(var(--neutral-lightgrayishmagenta));
+    border-radius: 1rem;
+    padding: 1rem;
+    
+    color: hsl(var(--primary-verydarkmagenta));
+    font-size: var(--font-size--body);
+    font-weight: 700;
+
+    /* border: 1px solid #fc0;  */
+}
+
+@media (min-width: 850px) {
+    .ratings li {
+        flex-direction: row;
+        gap: 2rem;
+        justify-content: center;
+        /* extra horizontal padding to set things in from the edge a bit */
+        padding: 1rem 2rem;
+    }
+
+    .ratings li:nth-child(2) {
+        /* margin-left: 4rem; */
+        align-self: center;
+    }
+
+    .ratings li:last-child {
+        /* margin-left: 8rem; */
+        align-self: flex-end;
+    }
+}
+
+.ratings-stars {
+    display: flex;
+    gap: 0.7rem;
+    /* flex-wrap: nowrap; */
+}
+
+.ratings-text {
+    text-align: center;
+    white-space: nowrap;
+    /* border: 1px solid #0ff;  */
+}
+
+.testimonials {
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+}
+
+@media (min-width: 850px) {
+    .testimonials {
+        grid-column: 1 / 3;
+
+        flex-direction: row;
+        /* to stop them stretching to the bottom */
+        align-items: flex-start;
+    }
+}
+
+.testimonial {
+    display: flex;
+    /* keep the wrap here, seems like the most elegant way to do it */
+    flex-wrap: wrap;
+    padding: 3rem;
+    background-color: hsl(var(--primary-verydarkmagenta));
+    border-radius: 1rem;
+    color: hsl(var(--neutral-white));
+    
+}
+
+@media (min-width: 850px) {
+
+    /* .testimonial:first-child {
+        margin-top: 0;
+    } */
+
+    .testimonial:nth-child(2) {
+        margin-top: 2rem;
+        /* tried align-self stuff here, don't think it'll work*/
+        /* without setting the height of the parent */
+    }
+
+    .testimonial:last-child {
+        margin-top: 4rem;
+    }
+}
+
+/* .testimonial img */
+.testimonial-avatar {
+    /* 20% of the parent? */
+    width: 20%;
+    /* to stop flex stretching / squashing the image */
+    align-self: center;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* .testimonial h3 */
+.testimonial-heading { 
+
+    font-weight: 700;
+    font-size: var(--font-size--default);
+    /* to vertically align the h3 with the avatar */
+    align-self: center;
+
+}
+
+/* .testimonial h3.span */
+.testimonial-subheading { 
+
+    color: hsl(var(--primary-softpink));
+    font-weight: 500;
+    /* font-size: var(--font-size--default); */
+
+}
+
+.testimonial-quote {
+    margin-top: 2rem;
+    font-size: var(--font-size--default);
+    font-weight: 500;
+}
